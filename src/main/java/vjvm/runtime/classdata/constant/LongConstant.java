@@ -16,6 +16,6 @@ public class LongConstant extends Constant {
 
     @Override
     public String toString() {
-        return String.format("Long: %a", aLong);
+        return String.format("Long: %d", aLong);
     }
 }

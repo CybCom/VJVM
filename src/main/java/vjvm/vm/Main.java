@@ -7,9 +7,7 @@ import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.FieldInfo;
 import vjvm.runtime.classdata.Interface;
 import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.classdata.constant.ClassConstant;
-import vjvm.runtime.classdata.constant.Constant;
-import vjvm.runtime.classdata.constant.UTF8Constant;
+import vjvm.runtime.classdata.constant.*;
 import vjvm.utils.UnimplementedError;
 
 import java.io.IOException;
@@ -102,47 +100,46 @@ class Dump implements Callable<Integer> {
         System.out.println("super class: " +
             ((UTF8Constant) clazz.constantPool().constant(index)).value());
 
-        System.err.println("!!!!!!!!!!!!!!!!");
-        System.err.println(((UTF8Constant)clazz.constantPool().constant(((ClassConstant)clazz.constantPool().constant(11)).nameIndex())).toString());
-        System.err.println("********************");
-
         System.out.println("constant pool:");
         printConstantPool(clazz);
 
-        //System.out.println("interfaces:");
-        //printInterfaces(clazz);
-//
+        System.out.println("interfaces:");
+        printInterfaces(clazz);
 
         System.out.println("fields:");
         printFields(clazz);
-//
-        //System.out.println("methods:");
-        //printMethods(clazz);
+
+        System.out.println("methods:");
+        printMethods(clazz);
     }
 
     private void printConstantPool(JClass clazz) {
         for (int i = 1; i < clazz.constantPool().size(); ++i) {
             Constant target = clazz.constantPool().constant(i);
             System.out.println(target.toString());
+            if (target instanceof LongConstant || target instanceof DoubleConstant) {
+                i++;
+            }
         }
     }
 
     private void printInterfaces(JClass clazz) {
         for (Interface i : clazz.interfaces()) {
-            System.out.println(((UTF8Constant) clazz.constantPool().constant(i.interfaceInfo())).value());
+            int index = ((ClassConstant) clazz.constantPool().constant(i.interfaceInfo())).nameIndex();
+            System.out.println(((UTF8Constant) clazz.constantPool().constant(index)).value());
         }
     }
 
     private void printFields(JClass clazz) {
         for (FieldInfo i : clazz.fields()) {
-            System.out.printf(i.name() + "(%x" + "): " + i.descriptor(), i.accessFlags());
+            System.out.printf(i.name() + "(0x%x" + "): " + i.descriptor(), i.accessFlags());
             System.out.println();
         }
     }
 
     private void printMethods(JClass clazz) {
         for (MethodInfo i : clazz.methods()) {
-            System.out.printf(i.name() + "(%x" + "): " + i.descriptor(), i.accessFlags());
+            System.out.printf(i.name() + "(0x%x" + "): " + i.descriptor(), i.accessFlags());
             System.out.println();
         }
     }

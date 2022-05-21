@@ -16,7 +16,6 @@ public abstract class Constant {
         var tag = input.readByte();
         var count = 1;
         // for constants reference pool easily.
-        ConstantPool pool = jClass.constantPool();
 
         // TODO: construct Float, Double, Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
         Constant result;
@@ -36,19 +35,25 @@ public abstract class Constant {
                 count = 2;
                 break;
             }
-            case CONSTANT_Long:
-                result = new UnknownConstant(input, 8);
+            // Who wrote fucking this?
+            // case CONSTANT_Long:
+            //     result = new UnknownConstant(input, 8);
+            //     count = 2;
+            //     break;
+            case CONSTANT_Long: {
+                result = new LongConstant(input);
                 count = 2;
                 break;
+            }
             case CONSTANT_MethodHandle:
                 result = new UnknownConstant(input, 3);
                 break;
             case CONSTANT_String: {
-                result = new StringConstant(input, pool);
+                result = new StringConstant(input, jClass);
                 break;
             }
             case CONSTANT_Class: {
-                result = new ClassConstant(input, pool);
+                result = new ClassConstant(input, jClass);
                 break;
             }
             case CONSTANT_MethodType:
@@ -59,15 +64,15 @@ public abstract class Constant {
                 break;
             }
             case CONSTANT_Fieldref: {
-                result = new FieldrefConstant(input, pool);
+                result = new FieldrefConstant(input, jClass);
                 break;
             }
             case CONSTANT_Methodref: {
-                result = new MethodrefConstant(input, pool);
+                result = new MethodrefConstant(input, jClass);
                 break;
             }
             case CONSTANT_InterfaceMethodref: {
-                result = new InterfaceMethodrefConstant(input, pool);
+                result = new InterfaceMethodrefConstant(input, jClass);
                 break;
             }
             case CONSTANT_Dynamic: // TODO: don't hurry.

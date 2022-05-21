@@ -12,12 +12,12 @@ public class ClassConstant extends Constant {
     @Getter
     private final short nameIndex;
 
-    private final ConstantPool pool;
+    private final JClass jClass;
 
     @SneakyThrows
-    ClassConstant(DataInput input, ConstantPool pool) {
+    ClassConstant(DataInput input, JClass jClass) {
         nameIndex = (short) input.readUnsignedShort();
-        this.pool = pool;
+        this.jClass = jClass;
 
         // DO NOT do like this, since the pool was not full here.
         // name = ((UTF8Constant)
@@ -26,6 +26,7 @@ public class ClassConstant extends Constant {
 
     @Override
     public String toString() {
+        ConstantPool pool = jClass.constantPool();
         return String.format("Class: " + ((UTF8Constant)
             pool.constant(nameIndex)).value());
     }
