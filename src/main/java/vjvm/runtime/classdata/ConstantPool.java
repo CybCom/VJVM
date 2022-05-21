@@ -27,7 +27,7 @@ public class ConstantPool {
         this.jClass = jClass;
         var count = dataInput.readUnsignedShort();
         constants = new Constant[count];
-        for (int i = 1; i < count; ) {
+        for (int i = 1; i < count; ) { // must greater than 0.
             var r = Constant.constructFromData(dataInput, jClass);
             constants[i] = r.getLeft();
             i += r.getRight();

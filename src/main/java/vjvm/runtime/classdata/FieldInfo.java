@@ -3,16 +3,20 @@ package vjvm.runtime.classdata;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.var;
 import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
+import vjvm.runtime.classdata.constant.UTF8Constant;
 import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
+import java.io.IOException;
 
 import static vjvm.classfiledefs.FieldAccessFlags.*;
 
 @RequiredArgsConstructor
 public class FieldInfo {
+    // Is this really useful to break the specification?
     @Getter
     private final short accessFlags;
     @Getter
@@ -25,7 +29,35 @@ public class FieldInfo {
 
     @SneakyThrows
     public FieldInfo(DataInput dataInput, JClass jClass) {
-        throw new UnimplementedError("TODO: get field info from constant pool");
+        // throw new UnimplementedError("TODO: get field info from constant pool");
+        this.jClass = jClass;
+
+        // from here start to read.
+        this.accessFlags = (short) dataInput.readUnsignedShort();
+
+        // confirm it is a UTF-8 obj.
+        var target = jClass.constantPool().constant(dataInput.readUnsignedShort());
+        this.name = ((UTF8Constant) target).value();
+
+        target = jClass.constantPool().constant(dataInput.readUnsignedShort());
+        this.descriptor = ((UTF8Constant) target).value();
+
+        this.attributes = Attribute.buildAttributes(dataInput, jClass.constantPool());
+    }
+
+    /**
+     * Build an array of field info, find the num automatically.
+     * @param dataInput the input of class file.
+     * @param jClass the jClass conclude this fieldInfos.
+     * @return an array of FieldInfo obj.
+     * */
+    public static FieldInfo[] buildFields(DataInput dataInput, JClass jClass) throws IOException {
+        var count = dataInput.readUnsignedShort();
+        FieldInfo[] fields = new FieldInfo[count];
+        for (int i = 0; i < count; ++i) {
+            fields[i] = new FieldInfo(dataInput, jClass);
+        }
+        return fields;
     }
 
     public int attributeCount() {

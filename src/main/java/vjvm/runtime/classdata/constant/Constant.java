@@ -2,9 +2,9 @@ package vjvm.runtime.classdata.constant;
 
 import lombok.var;
 import lombok.SneakyThrows;
-import lombok.var;
 import org.apache.commons.lang3.tuple.Pair;
 import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.ConstantPool;
 
 import java.io.DataInput;
 
@@ -15,6 +15,8 @@ public abstract class Constant {
     public static Pair<Constant, Integer> constructFromData(DataInput input, JClass jClass) {
         var tag = input.readByte();
         var count = 1;
+        // for constants reference pool easily.
+        ConstantPool pool = jClass.constantPool();
 
         // TODO: construct Float, Double, Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
         Constant result;
@@ -29,7 +31,11 @@ public abstract class Constant {
                 result = new UTF8Constant(input);
                 break;
             }
-            case CONSTANT_Double:
+            case CONSTANT_Double: {
+                result = new DoubleConstant(input);
+                count = 2;
+                break;
+            }
             case CONSTANT_Long:
                 result = new UnknownConstant(input, 8);
                 count = 2;
@@ -37,23 +43,40 @@ public abstract class Constant {
             case CONSTANT_MethodHandle:
                 result = new UnknownConstant(input, 3);
                 break;
-            case CONSTANT_String:
-            case CONSTANT_Class:
+            case CONSTANT_String: {
+                result = new StringConstant(input, pool);
+                break;
+            }
+            case CONSTANT_Class: {
+                result = new ClassConstant(input, pool);
+                break;
+            }
             case CONSTANT_MethodType:
                 result = new UnknownConstant(input, 2);
                 break;
-            case CONSTANT_Float:
-            case CONSTANT_Fieldref:
-            case CONSTANT_Methodref:
-            case CONSTANT_InterfaceMethodref:
-            case CONSTANT_Dynamic:
+            case CONSTANT_Float: {
+                result = new FloatConstant(input);
+                break;
+            }
+            case CONSTANT_Fieldref: {
+                result = new FieldrefConstant(input, pool);
+                break;
+            }
+            case CONSTANT_Methodref: {
+                result = new MethodrefConstant(input, pool);
+                break;
+            }
+            case CONSTANT_InterfaceMethodref: {
+                result = new InterfaceMethodrefConstant(input, pool);
+                break;
+            }
+            case CONSTANT_Dynamic: // TODO: don't hurry.
             case CONSTANT_InvokeDynamic:
                 result = new UnknownConstant(input, 4);
                 break;
             default:
                 throw new ClassFormatError();
         }
-
         return Pair.of(result, count);
     }
 }

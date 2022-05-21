@@ -3,9 +3,9 @@ package vjvm.runtime;
 import vjvm.classloader.JClassLoader;
 import vjvm.runtime.classdata.ConstantPool;
 import vjvm.runtime.classdata.FieldInfo;
+import vjvm.runtime.classdata.Interface;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.attribute.Attribute;
-import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
 import java.io.InvalidClassException;
@@ -27,9 +27,19 @@ public class JClass {
     private final ConstantPool constantPool;
     @Getter
     private final int accessFlags;
+    @Getter
+    private final int thisClass;
+    @Getter
+    private final int superClass;
+    @Getter
+    private final Interface[] interfaces;
+    @Getter
     private final FieldInfo[] fields;
+    @Getter
     private final MethodInfo[] methods;
+    @Getter
     private final Attribute[] attributes;
+
 
     @SneakyThrows
     public JClass(DataInput dataInput, JClassLoader classLoader) {
@@ -46,16 +56,19 @@ public class JClass {
         majorVersion = dataInput.readUnsignedShort();
 
         constantPool = new ConstantPool(dataInput, this);
-        accessFlags = dataInput.readUnsignedShort();
 
-        fields = null;
-        methods = null;
-        attributes = null;
+        accessFlags = dataInput.readUnsignedShort();
+        thisClass = dataInput.readUnsignedShort();
+        superClass = dataInput.readUnsignedShort();
+
+        interfaces = Interface.buildInterfaces(dataInput);
+        fields = FieldInfo.buildFields(dataInput, this);
+        methods = MethodInfo.buildMethods(dataInput, this);
+        attributes = Attribute.buildAttributes(dataInput, this.constantPool);
         // throw new UnimplementedError(
         //     "TODO: you need to construct thisClass, superClass, interfaces, fields, "
         //         + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1."
         //         + "Some of them are not defined; you need to define them yourself");
-
     }
 
     public boolean public_() {
@@ -92,6 +105,14 @@ public class JClass {
 
     public boolean module() {
         return (accessFlags & ACC_MODULE) != 0;
+    }
+
+    public int interfaceCount() {
+        return interfaces.length;
+    }
+
+    public Interface oneInterface(int index) {
+        return interfaces[index];
     }
 
     public int fieldsCount() {
