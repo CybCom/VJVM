@@ -4,7 +4,6 @@ import lombok.var;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.tuple.Pair;
 import vjvm.runtime.JClass;
-import vjvm.runtime.classdata.ConstantPool;
 
 import java.io.DataInput;
 

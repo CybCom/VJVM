@@ -45,4 +45,11 @@ class FindClasses {
 
         assertEquals(-1, exec.apply("Koo"));
     }
+
+    @Test
+    void findInJDK() {
+        Function<String, Integer> exec = (c) -> runCmd(jarPath.toString(), "" + c);
+
+        assertEquals(0, exec.apply("java.lang.String"));
+    }
 }

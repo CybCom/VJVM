@@ -16,7 +16,6 @@ public abstract class ClassSearchPath implements Closeable {
      */
     public static ClassSearchPath[] constructSearchPath(String path) {
         String sep = System.getProperty("path.separator");
-
         // throw new UnimplementedError("TODO: parse path and return an array of search paths");
         String[] pathStringArray = path.split(sep);
         int arrayLength = pathStringArray.length;
@@ -36,18 +35,13 @@ public abstract class ClassSearchPath implements Closeable {
                     if (targetPathObject.isFile()) { // if target is .jar
                         try {   // no 'try'-with-resources, it will close file automatically.
                             JarFile targetJar = new JarFile(targetPathString);
-                            InputStream classFileStream =
-                                targetJar.getInputStream(targetJar.getJarEntry(classPathRelativeString));
-                            return classFileStream;
+                            return targetJar.getInputStream(targetJar.getJarEntry(classPathRelativeString));
                         } catch (NullPointerException | IOException e) {
                             return null;
                         }
                     } else if (targetPathObject.isDirectory()) { // if target is dir.
                         try {
-                            InputStream classFileStream =
-                                Files.newInputStream(Paths.get(targetPathString, classPathRelativeString));
-
-                            return classFileStream;
+                            return Files.newInputStream(Paths.get(targetPathString, classPathRelativeString));
                         } catch (NullPointerException | IOException e) {
                             return null;
                         }

@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import vjvm.classloader.searchpath.ClassSearchPath;
 import vjvm.runtime.JClass;
 import vjvm.vm.VMContext;
-import vjvm.utils.UnimplementedError;
 
 import java.io.Closeable;
 import java.io.DataInputStream;
@@ -34,7 +33,7 @@ public class JClassLoader implements Closeable {
      * <p>
      * Otherwise, return null.
      */
-    public JClass loadClass(String descriptor) throws IOException {
+    public JClass loadClass(String descriptor) {
         // throw new UnimplementedError("TODO: load class");
         // To construct a JClass, use the following constructor
         // return new JClass(new DataInputStream(istream_from_file), this);
@@ -45,14 +44,20 @@ public class JClassLoader implements Closeable {
             targetClass = parent.loadClass(descriptor);
         }
         if (targetClass != null) {
+            definedClass.put(descriptor, targetClass);
             return targetClass;
         } else {
-            for (ClassSearchPath onePath : searchPaths) {
-                InputStream possibleFile = onePath.findClass(descriptor);
-                if (possibleFile != null) {
-                    targetClass = new JClass(new DataInputStream(possibleFile), this);
-                    return targetClass;
+            try {
+                for (ClassSearchPath onePath : searchPaths) {
+                    InputStream possibleFile = onePath.findClass(descriptor);
+                    if (possibleFile != null) {
+                        targetClass = new JClass(new DataInputStream(possibleFile), this);
+                        definedClass.put(descriptor, targetClass);
+                        return targetClass;
+                    }
                 }
+            } catch (IOException e) {   // if the searchPath is null.
+                return null;
             }
         }
         return null;
