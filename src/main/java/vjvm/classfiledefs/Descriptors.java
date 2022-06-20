@@ -1,6 +1,8 @@
 package vjvm.classfiledefs;
 
-import lombok.var;
+/**
+ * Spec. Table 4.3-A. Interpretation of field descriptors
+ */
 public class Descriptors {
   public static final char DESC_byte = 'B';
   public static final char DESC_char = 'C';

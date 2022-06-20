@@ -3,17 +3,39 @@ package vjvm.runtime.classdata.attribute;
 import lombok.var;
 import lombok.SneakyThrows;
 import vjvm.runtime.classdata.ConstantPool;
+import vjvm.runtime.classdata.FieldInfo;
+import vjvm.runtime.classdata.constant.Constant;
 
 import java.io.DataInput;
+import java.io.IOException;
 
 public abstract class Attribute {
+    // yes, we do not need to reference to pool now, but is this perfect?
+    // private final String name;
+    // private final int length;
+    // private final info[];
 
-  @SneakyThrows
-  public static Attribute constructFromData(DataInput input, ConstantPool constantPool) {
-    var nameIndex = input.readUnsignedShort();
-    var attrLength = Integer.toUnsignedLong(input.readInt());
+    // no need to finish it here. wait for next labs.
+    @SneakyThrows
+    public static Attribute constructFromData(DataInput input, ConstantPool constantPool) {
+        var nameIndex = input.readUnsignedShort();
+        var attrLength = Integer.toUnsignedLong(input.readInt());
 
-    // TODO: detect and construct Code attribute
-    return new UnknownAttribute(input, attrLength);
-  }
+        return new UnknownAttribute(input, attrLength);
+    }
+
+    /**
+     * Construct an array of attributes, find the num automatically.
+     * @param dataInput the input of class file.
+     * @param constantPool the constantPool in current JClass.
+     * @return an array of Attribute obj.
+     * */
+    public static Attribute[] buildAttributes(DataInput dataInput, ConstantPool constantPool) throws IOException {
+        var count = dataInput.readUnsignedShort();
+        Attribute[] attributes = new Attribute[count];
+        for (int i = 0; i < count; ++i) {
+            attributes[i] = constructFromData(dataInput, constantPool);
+        }
+        return attributes;
+    }
 }

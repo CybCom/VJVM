@@ -5,17 +5,17 @@ import lombok.SneakyThrows;
 
 import java.io.DataInput;
 
-public class IntegerConstant extends Constant {
+public class FloatConstant extends Constant {
     @Getter
-    private final int bytes;
+    private final float bytes;
 
     @SneakyThrows
-    IntegerConstant(DataInput input) {
-        bytes = input.readInt();
+    FloatConstant(DataInput input) {
+        bytes = input.readFloat();
     }
 
     @Override
     public String toString() {
-        return String.format("Integer: %d", bytes);
+        return String.format("Float: %a", bytes);
     }
 }

@@ -16,45 +16,59 @@ import lombok.var;
 import static vjvm.classfiledefs.ClassAccessFlags.*;
 
 public class JClass {
-  @Getter
-  private final JClassLoader classLoader;
-  @Getter
-  private final int minorVersion;
-  @Getter
-  private final int majorVersion;
-  @Getter
-  private final ConstantPool constantPool;
-  @Getter
-  private final int accessFlags;
-  private final FieldInfo[] fields;
-  private final MethodInfo[] methods;
-  private final Attribute[] attributes;
+    @Getter
+    private final JClassLoader classLoader;
+    @Getter
+    private final int minorVersion;
+    @Getter
+    private final int majorVersion;
+    @Getter
+    private final ConstantPool constantPool;
+    @Getter
+    private final int accessFlags;
+    @Getter
+    private final int thisClass;
+    @Getter
+    private final int superClass;
+    @Getter
+    private final Interface[] interfaces;
+    @Getter
+    private final FieldInfo[] fields;
+    @Getter
+    private final MethodInfo[] methods;
+    @Getter
+    private final Attribute[] attributes;
 
-  @SneakyThrows
-  public JClass(DataInput dataInput, JClassLoader classLoader) {
-    this.classLoader = classLoader;
 
-    // check magic number
-    var magic = dataInput.readInt();
-    if (magic != 0xcafebabe) {
-      throw new InvalidClassException(String.format(
-        "Wrong magic number, expected: 0xcafebabe, got: 0x%x", magic));
+    @SneakyThrows
+    public JClass(DataInput dataInput, JClassLoader classLoader) {
+        this.classLoader = classLoader;
+
+        // check magic number
+        var magic = dataInput.readInt();
+        if (magic != 0xcafebabe) {
+            throw new InvalidClassException(String.format(
+                "Wrong magic number, expected: 0xcafebabe, got: 0x%x", magic));
+        }
+
+        minorVersion = dataInput.readUnsignedShort();
+        majorVersion = dataInput.readUnsignedShort();
+
+        constantPool = new ConstantPool(dataInput, this);
+
+        accessFlags = dataInput.readUnsignedShort();
+        thisClass = dataInput.readUnsignedShort();
+        superClass = dataInput.readUnsignedShort();
+
+        interfaces = Interface.buildInterfaces(dataInput);
+        fields = FieldInfo.buildFields(dataInput, this);
+        methods = MethodInfo.buildMethods(dataInput, this);
+        attributes = Attribute.buildAttributes(dataInput, this.constantPool);
+        // throw new UnimplementedError(
+        //     "TODO: you need to construct thisClass, superClass, interfaces, fields, "
+        //         + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1."
+        //         + "Some of them are not defined; you need to define them yourself");
     }
-
-    minorVersion = dataInput.readUnsignedShort();
-    majorVersion = dataInput.readUnsignedShort();
-
-    constantPool = new ConstantPool(dataInput, this);
-    accessFlags = dataInput.readUnsignedShort();
-
-    fields = null;
-    methods = null;
-    attributes = null;
-    throw new UnimplementedError(
-        "TODO: you need to construct thisClass, superClass, interfaces, fields, "
-        + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1."
-        + "Some of them are not defined; you need to define them yourself");
-  }
 
   public MethodInfo findMethod(String name, String descriptor) {
     for (var method : methods)
