@@ -1,10 +1,8 @@
 package vjvm.runtime.classdata.attribute;
 
-import lombok.var;
 import lombok.SneakyThrows;
+import lombok.var;
 import vjvm.runtime.classdata.ConstantPool;
-import vjvm.runtime.classdata.FieldInfo;
-import vjvm.runtime.classdata.constant.Constant;
 
 import java.io.DataInput;
 import java.io.IOException;
@@ -26,10 +24,11 @@ public abstract class Attribute {
 
     /**
      * Construct an array of attributes, find the num automatically.
-     * @param dataInput the input of class file.
+     *
+     * @param dataInput    the input of class file.
      * @param constantPool the constantPool in current JClass.
      * @return an array of Attribute obj.
-     * */
+     */
     public static Attribute[] buildAttributes(DataInput dataInput, ConstantPool constantPool) throws IOException {
         var count = dataInput.readUnsignedShort();
         Attribute[] attributes = new Attribute[count];

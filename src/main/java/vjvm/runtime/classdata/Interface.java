@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * Conclude 2 bytes index for one interface, to keep the format of Class file.
- * */
+ */
 public class Interface {
     // and Interfaces is just an array of shorts, no more attributes.
     @Getter
@@ -16,16 +16,17 @@ public class Interface {
 
     /**
      * Build an Interface obj, to keep the int final.
-     * */
+     */
     public Interface(DataInput dataInput) throws IOException {
         this.interfaceInfo = dataInput.readUnsignedShort();
     }
 
     /**
      * Build an array of interface, find the num automatically.
+     *
      * @param dataInput the input of class file.
      * @return an array of interface obj.
-     * */
+     */
     public static Interface[] buildInterfaces(DataInput dataInput) throws IOException {
         var count = dataInput.readUnsignedShort();
         Interface[] interfaces = new Interface[count];

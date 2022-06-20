@@ -1,17 +1,13 @@
 package lab1;
 
 import org.junit.jupiter.api.Test;
-import picocli.CommandLine;
-import vjvm.vm.Main;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static lab1.Utils.runCmd;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FindClasses {
     final Path resPath = FileSystems.getDefault().getPath(System.getenv("VJVM_TESTRES_PATH"));

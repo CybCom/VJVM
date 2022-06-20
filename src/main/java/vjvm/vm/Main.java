@@ -8,7 +8,6 @@ import vjvm.runtime.classdata.FieldInfo;
 import vjvm.runtime.classdata.Interface;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.constant.*;
-import vjvm.utils.UnimplementedError;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -36,28 +35,25 @@ public class Main implements Callable<Integer> {
 @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
 @Command(name = "run", description = "Execute java program")
 class Run implements Callable<Integer> {
+    @Option(names = {"-d", "--debug"}, description = "Stop at the first instruction and start monitor")
+    boolean debug = false;
     @ParentCommand
     private Main parent;
-
     @Parameters(index = "0", description = "Class to run, e.g. vjvm.vm.Main")
     private String entryClass = "";
-
     @Parameters(index = "1..*", description = "Arguments passed to java program")
     private String[] args = {};
 
-  @Option(names = { "-d", "--debug" }, description = "Stop at the first instruction and start monitor")
-  boolean debug = false;
+    @Override
+    public Integer call() {
+        var ctx = new VMContext(parent.userClassPath);
+        if (debug) {
+            ctx.interpreter().step(0);
+        }
 
-  @Override
-  public Integer call() {
-    var ctx = new VMContext(parent.userClassPath);
-    if (debug) {
-      ctx.interpreter().step(0);
+        ctx.run(entryClass);
+        return 0;
     }
-
-    ctx.run(entryClass);
-    return 0;
-  }
 }
 
 @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})

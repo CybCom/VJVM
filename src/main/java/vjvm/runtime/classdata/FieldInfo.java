@@ -7,7 +7,6 @@ import lombok.var;
 import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
 import vjvm.runtime.classdata.constant.UTF8Constant;
-import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
 import java.io.IOException;
@@ -47,10 +46,11 @@ public class FieldInfo {
 
     /**
      * Build an array of field info, find the num automatically.
+     *
      * @param dataInput the input of class file.
-     * @param jClass the jClass conclude this fieldInfos.
+     * @param jClass    the jClass conclude this fieldInfos.
      * @return an array of FieldInfo obj.
-     * */
+     */
     public static FieldInfo[] buildFields(DataInput dataInput, JClass jClass) throws IOException {
         var count = dataInput.readUnsignedShort();
         FieldInfo[] fields = new FieldInfo[count];

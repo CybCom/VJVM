@@ -1,8 +1,8 @@
 package vjvm.classloader;
 
-import lombok.var;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import lombok.var;
 import vjvm.classloader.searchpath.ClassSearchPath;
 import vjvm.runtime.JClass;
 import vjvm.vm.VMContext;
