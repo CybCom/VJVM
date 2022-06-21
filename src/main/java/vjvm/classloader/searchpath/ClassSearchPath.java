@@ -18,8 +18,9 @@ public abstract class ClassSearchPath implements Closeable {
      * Construct search path objects with a given path.
      */
     public static ClassSearchPath[] constructSearchPath(String path) {
-        String sep = System.getProperty("path.separator");
         // throw new UnimplementedError("TODO: parse path and return an array of search paths");
+
+        String sep = System.getProperty("path.separator");
         String[] pathStringArray = path.split(sep);
         int arrayLength = pathStringArray.length;
         ClassSearchPath[] pathObjectArray = new ClassSearchPath[arrayLength];

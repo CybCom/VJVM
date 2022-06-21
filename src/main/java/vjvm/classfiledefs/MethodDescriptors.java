@@ -1,14 +1,26 @@
 package vjvm.classfiledefs;
 
 import lombok.var;
-import vjvm.utils.UnimplementedError;
 
 public class MethodDescriptors {
+    /**
+     * Calculate the arg nums from a descriptor.
+     */
     public static int argc(String descriptor) {
         assert descriptor.startsWith("(");
 
         // TODO: calculate arguments size in slots
-        throw new UnimplementedError();
+        // throw new UnimplementedError();
+        int countSum = 0;
+        for (int i = 1; descriptor.charAt(i) != ')'; i++) {
+            countSum += Descriptors.size(descriptor.charAt(i));
+            if (descriptor.charAt(i) == '[') {  // meet an array arg
+                while (descriptor.charAt(i) == '[') {
+                    i++;    // while meet array of arrays, like '[[I'
+                }
+            }
+        }
+        return countSum;
     }
 
     public static char returnType(String descriptor) {

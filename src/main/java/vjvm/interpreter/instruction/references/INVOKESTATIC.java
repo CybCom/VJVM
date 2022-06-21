@@ -5,14 +5,14 @@ import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
-import vjvm.utils.UnimplementedError;
 
 public class INVOKESTATIC extends Instruction {
     private final MethodInfo method;
 
     public INVOKESTATIC(ProgramCounter pc, MethodInfo method) {
         // TODO: decode invokestatic
-        throw new UnimplementedError();
+        // throw new UnimplementedError();
+        this.method = method;
     }
 
     @Override

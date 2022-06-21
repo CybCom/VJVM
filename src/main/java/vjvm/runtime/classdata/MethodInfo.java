@@ -48,6 +48,12 @@ public class MethodInfo {
         this.descriptor = ((UTF8Constant) target).value();
 
         this.attributes = Attribute.buildAttributes(dataInput, jClass.constantPool());
+
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof Code) {
+                code = (Code) attribute;
+            }
+        }
     }
 
 

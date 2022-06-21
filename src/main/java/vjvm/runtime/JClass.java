@@ -9,7 +9,8 @@ import vjvm.runtime.classdata.FieldInfo;
 import vjvm.runtime.classdata.Interface;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.attribute.Attribute;
-import vjvm.utils.UnimplementedError;
+import vjvm.runtime.classdata.constant.ClassConstant;
+import vjvm.runtime.classdata.constant.UTF8Constant;
 
 import java.io.DataInput;
 import java.io.InvalidClassException;
@@ -133,6 +134,8 @@ public class JClass {
 
     public String name() {
         // TODO: return class name from thisClass
-        throw new UnimplementedError();
+        // throw new UnimplementedError();
+        int index = ((ClassConstant) (constantPool.constant(thisClass))).nameIndex();
+        return ((UTF8Constant) (constantPool.constant(index))).value();
     }
 }
