@@ -21,6 +21,7 @@ public class OperandStack {
     public void pushInt(int value) {
         // TODO: push value
         // throw new UnimplementedError();
+        System.err.println("Push INT " + value);
         top++;
         slots.int_(top, value);
     }
@@ -141,8 +142,9 @@ public class OperandStack {
         int newTop = -1;
         for (int i = 0; i < count; i++) {
             newTop++;
-            System.err.println("pop slot count " + count + " have slot " + top);
-            assert slots.typeOf(top) != Slots.Type.LONG && slots.typeOf(top) != Slots.Type.DOUBLE;
+
+            System.err.println("pop slots of op stack count " + count + ", have slots " + (top + 1));
+
             if (this.slots.typeOf(top) == Slots.Type.LONG2 || slots.typeOf(top) == Slots.Type.DOUBLE2) {
                 newSlots.value(newTop, slots.value(top), slots.typeOf(top - 1));
                 newTop++;

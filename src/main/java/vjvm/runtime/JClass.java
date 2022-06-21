@@ -76,7 +76,6 @@ public class JClass {
         for (var method : methods)
             if (method.name().equals(name) && method.descriptor().equals(descriptor))
                 return method;
-
         return null;
     }
 

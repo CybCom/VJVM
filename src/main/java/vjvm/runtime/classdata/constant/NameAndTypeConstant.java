@@ -33,6 +33,13 @@ public class NameAndTypeConstant extends Constant {
         return descriptor;
     }
 
+    public String descriptor() {
+        if (descriptor == null) {
+            descriptor = ((UTF8Constant) self.constantPool().constant(descriptorIndex)).value();
+        }
+        return descriptor;
+    }
+
     @Override
     public String toString() {
         return String.format("NameAndType: %s:%s", name(), type());

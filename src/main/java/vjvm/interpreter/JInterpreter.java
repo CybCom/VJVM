@@ -44,7 +44,8 @@ public class JInterpreter {
             return null;
         });
         nativeTable.put(Triple.of("lab2/IOUtil", "writeChar", "(C)V"), (t, a) -> {
-            System.out.println(a.char_(0));
+            // System.out.println(a.int_(0)); smile :-)
+            System.out.println((char) a.int_(0));
             return null;
         });
     }

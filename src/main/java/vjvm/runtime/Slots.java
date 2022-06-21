@@ -206,7 +206,7 @@ public class Slots {
     }
 
     public void value(int index, Optional valueOptional, Type targetType) {
-        System.err.println("push value at " + index + " with " + targetType);
+        System.err.println("push value " + valueOptional.get() + " at " + index + " with " + targetType);
         // automatically input a value.
         assert typeList[index] == Type.BLANK;
         assert valueOptional.isPresent();

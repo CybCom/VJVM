@@ -13,6 +13,7 @@ public class HelloWorld {
         IOUtil.writeChar('o');
         IOUtil.writeChar('r');
         IOUtil.writeInt(1);
+        //IOUtil.writeChar('l');  // smile
         IOUtil.writeChar('d');
     }
 }
