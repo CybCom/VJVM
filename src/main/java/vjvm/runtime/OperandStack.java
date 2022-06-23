@@ -3,6 +3,7 @@ package vjvm.runtime;
 import lombok.Getter;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class OperandStack {
     @Getter
@@ -21,24 +22,29 @@ public class OperandStack {
     public void pushInt(int value) {
         // TODO: push value
         // throw new UnimplementedError();
-        System.err.println("Push INT " + value);
         top++;
-        slots.int_(top, value);
+        slots.value(top, Optional.of(value));
     }
 
     public int popInt() {
         // TODO: pop value
         // throw new UnimplementedError();
-        int value = (int) slots.popValue(top).get();
+        Object value = slots.popValue(top).get();
         top--;
-        return value;
+        if (value instanceof Integer) {     // TODO: I can not understand why there can be i2b then istore.
+            return (int) value;
+        } else if (value instanceof Character) {
+            return Character.getNumericValue((Character) value);
+        } else {
+            return Integer.parseInt(value.toString());
+        }
     }
 
     public void pushFloat(float value) {
         // TO-DO: push value
         // throw new UnimplementedError();
         top++;
-        slots.float_(top, value);
+        slots.value(top, Optional.of(value));
     }
 
     public float popFloat() {
@@ -53,23 +59,30 @@ public class OperandStack {
         // TO-DO: push value
         // throw new UnimplementedError();
         top++;
-        slots.long_(top, value);
+        if (top < 0) {
+            top = 0;    // I don't know why.
+        }
+        slots.value(top, Optional.of(value));
         top++;
     }
 
     public long popLong() {
         // TO-DO: pop value
         // throw new UnimplementedError();
-        long value = (long) slots.popValue(top).get();
+        Object value = slots.popValue(top).get();
         top -= 2;
-        return value;
+        if (value instanceof Long) {
+            return (long) value;
+        } else {
+            return Long.parseLong(value.toString());
+        }
     }
 
     public void pushDouble(double value) {
-        // TO-DO: push value
+        // TODO: push value
         // throw new UnimplementedError();
         top++;
-        slots.double_(top, value);
+        slots.value(top, Optional.of(value));
         top++;
     }
 
@@ -82,10 +95,10 @@ public class OperandStack {
     }
 
     public void pushByte(byte value) {
-        // TO-DO: push value
+        // TODO: push value
         // throw new UnimplementedError();
         top++;
-        slots.byte_(top, value);
+        slots.value(top, Optional.of(value));
     }
 
     public byte popByte() {
@@ -100,7 +113,7 @@ public class OperandStack {
         // TO-DO: push value
         // throw new UnimplementedError();
         top++;
-        slots.char_(top, value);
+        slots.value(top, Optional.of(value));
     }
 
     public char popChar() {
@@ -115,7 +128,22 @@ public class OperandStack {
         // TO-DO: push value
         // throw new UnimplementedError();
         top++;
-        slots.short_(top, value);
+        slots.value(top, Optional.of(value));
+    }
+
+    public Object popReference() {
+        // TO-DO: pop value
+        // throw new UnimplementedError();
+        Object value = slots.popValue(top).get();
+        top--;
+        return value;
+    }
+
+    public void pushReference(Object value) {
+        // TO-DO: push value
+        // throw new UnimplementedError();
+        top++;
+        slots.value(top, Optional.of(value));
     }
 
     public short popShort() {
@@ -126,12 +154,18 @@ public class OperandStack {
         return value;
     }
 
-    public void pushSlots(Slots slots) {
-        // TODO: push slots     what does this mean? count slots?
+    public void pushSlots(Slots slots) {    // how can this bug kept here for such long?
+        // TODO: push slots
         // throw new UnimplementedError();
-        for (int i = 0; i < slots.size(); i++) {
-            slots.copyTo(0, slots.size(), this.slots, top + 1);
-            top += slots.size();
+        for (int i = slots.size() - 1; i >= 0; i--) {
+            top++;
+            if (slots.typeOf(i) == Slots.Type.LONG2 || slots.typeOf(i) == Slots.Type.DOUBLE2) {
+                this.slots.value(top, slots.value(i));
+                top++;
+                i--;
+            } else {
+                this.slots.value(top, slots.value(i));
+            }
         }
     }
 
@@ -142,18 +176,15 @@ public class OperandStack {
         int newTop = -1;
         for (int i = 0; i < count; i++) {
             newTop++;
-
-            System.err.println("pop slots of op stack count " + count + ", have slots " + (top + 1));
-
             if (this.slots.typeOf(top) == Slots.Type.LONG2 || slots.typeOf(top) == Slots.Type.DOUBLE2) {
-                newSlots.value(newTop, slots.value(top), slots.typeOf(top - 1));
+                newSlots.value(newTop, slots.value(top));
                 newTop++;
                 slots.typeList[top] = Slots.Type.BLANK;
                 slots.typeList[top - 1] = Slots.Type.BLANK;
                 top -= 2;
                 i++;
             } else {
-                newSlots.value(newTop, slots.value(top), slots.typeOf(top));
+                newSlots.value(newTop, slots.value(top));
                 slots.typeList[top] = Slots.Type.BLANK;
                 top--;
             }

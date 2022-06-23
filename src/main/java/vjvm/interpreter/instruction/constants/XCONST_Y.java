@@ -11,6 +11,9 @@ import vjvm.runtime.classdata.MethodInfo;
 
 import java.util.function.BiConsumer;
 
+/**
+ * load specific constant to op stack.
+ * */
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class XCONST_Y<T> extends Instruction {
     private final T value;
@@ -46,9 +49,38 @@ public class XCONST_Y<T> extends Instruction {
         return new XCONST_Y<Integer>(5, OperandStack::pushInt, "iconst_5");
     }
 
+    public static final XCONST_Y<Long> LCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Long>(0L, OperandStack::pushLong, "lconst_0");
+    }
+
+    public static final XCONST_Y<Long> LCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Long>(1L, OperandStack::pushLong, "lconst_1");
+    }
+
+    public static final XCONST_Y<Float> FCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Float>(0f, OperandStack::pushFloat, "fconst_0");
+    }
+
+    public static final XCONST_Y<Float> FCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Float>(1f, OperandStack::pushFloat, "fconst_1");
+    }
+
+    public static final XCONST_Y<Float> FCONST_2(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Float>(2f, OperandStack::pushFloat, "fconst_2");
+    }
+
+    public static final XCONST_Y<Double> DCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Double>(0d, OperandStack::pushDouble, "dconst_0");
+    }
+
+    public static final XCONST_Y<Double> DCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<Double>(1d, OperandStack::pushDouble, "dconst_1");
+    }
+
     @Override
     public void run(JThread thread) {
         var stack = thread.top().stack();
+        System.err.println(name + ": " + value);
         pushFunc.accept(stack, value);
     }
 

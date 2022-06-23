@@ -3,9 +3,7 @@ package vjvm.interpreter.instruction.references;
 import lombok.var;
 import vjvm.classfiledefs.Descriptors;
 import vjvm.interpreter.instruction.Instruction;
-import vjvm.runtime.JClass;
-import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.*;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.constant.ClassConstant;
 import vjvm.runtime.classdata.constant.MethodrefConstant;
@@ -13,7 +11,6 @@ import vjvm.runtime.classdata.constant.NameAndTypeConstant;
 
 public class INVOKESTATIC extends Instruction {
     private final MethodInfo method;
-    private final int index;
     private final MethodInfo targetMethodInfo;
 
     public INVOKESTATIC(ProgramCounter pc, MethodInfo method) {
@@ -22,7 +19,7 @@ public class INVOKESTATIC extends Instruction {
         this.method = method;
         int indexByte1 = pc.byte_();
         int indexByte2 = pc.byte_();
-        index =  (indexByte1 << 8) | indexByte2;
+        int index = (indexByte1 << 8) | indexByte2;
 
         // load the target class.
         JClass parentClass = method.jClass();
@@ -37,22 +34,31 @@ public class INVOKESTATIC extends Instruction {
         String targetMethodDescriptor = targetNameAndType.descriptor();
 
         targetMethodInfo = targetClass.findMethod(targetMethodName, targetMethodDescriptor);
-        System.err.println("prepare to invoke: " + index + " for " + targetMethodName + " described as " + targetMethodDescriptor);
-        System.err.println("find info " + targetMethodInfo);
+
+        /*
+         * pre exec output
+         * */
+        System.err.println("prepare invoke static: " + index + " for " + targetMethodName +
+            " described as " + targetMethodDescriptor + " from " + targetClass);
     }
 
     @Override
     public void run(JThread thread) {
         var stack = thread.top().stack();
-        var args = stack.popSlots(method.argc());
+        int numArg = targetMethodInfo.argc();   // REMEMBER: targetMethod is NOT method
+        var args = stack.popSlots(targetMethodInfo.argc());
 
-        System.err.println("invoking static: operand stack pop " + args.int_(0));
-
-        thread.context().interpreter().invoke(targetMethodInfo, thread, args);
+        OperandStack reverseStack = new OperandStack(numArg);
+        reverseStack.pushSlots(args);
+        /*
+        * exec output
+        * */
+        System.err.println("invoke static: " + targetMethodInfo + " with args " + args + " have arg " + numArg);
+        thread.context().interpreter().invoke(targetMethodInfo, thread, reverseStack.slots());
     }
 
     @Override
     public String toString() {
-        return String.format("invokestatic %s:%s:%s", method.jClass().name(), method.name(), method.descriptor());
+        return String.format("invokestatic %s:%s:%s", targetMethodInfo.jClass().name(), targetMethodInfo.name(), targetMethodInfo.descriptor());
     }
 }

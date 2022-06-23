@@ -1,0 +1,129 @@
+Date : 2022-06-23 19:09:44
+Directory : \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src
+Total : 76 files,  3765 codes, 315 comments, 827 blanks, all 4907 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         76 |      3,765 |        315 |        827 |      4,907 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                 |         76 |      3,765 |        315 |        827 |      4,907 |
+| main                                                                                                                              |         70 |      3,474 |        312 |        744 |      4,530 |
+| main\java                                                                                                                         |         70 |      3,474 |        312 |        744 |      4,530 |
+| main\java\vjvm                                                                                                                    |         70 |      3,474 |        312 |        744 |      4,530 |
+| main\java\vjvm\classfiledefs                                                                                                      |          8 |        389 |         40 |         35 |        464 |
+| main\java\vjvm\classloader                                                                                                        |          3 |        154 |         29 |         28 |        211 |
+| main\java\vjvm\classloader\searchpath                                                                                             |          2 |         97 |         19 |         21 |        137 |
+| main\java\vjvm\interpreter                                                                                                        |         28 |      1,522 |         54 |        342 |      1,918 |
+| main\java\vjvm\interpreter\instruction                                                                                            |         25 |      1,144 |         36 |        267 |      1,447 |
+| main\java\vjvm\interpreter\instruction\comparisons                                                                                |          4 |        268 |          4 |         48 |        320 |
+| main\java\vjvm\interpreter\instruction\constants                                                                                  |          4 |        181 |         10 |         42 |        233 |
+| main\java\vjvm\interpreter\instruction\control                                                                                    |          2 |         73 |          0 |         18 |         91 |
+| main\java\vjvm\interpreter\instruction\conversions                                                                                |          1 |         75 |          0 |         22 |         97 |
+| main\java\vjvm\interpreter\instruction\loads                                                                                      |          1 |         86 |          3 |         26 |        115 |
+| main\java\vjvm\interpreter\instruction\math                                                                                       |          4 |         60 |          0 |         21 |         81 |
+| main\java\vjvm\interpreter\instruction\references                                                                                 |          1 |         43 |          9 |         13 |         65 |
+| main\java\vjvm\interpreter\instruction\reserved                                                                                   |          1 |         20 |          0 |          5 |         25 |
+| main\java\vjvm\interpreter\instruction\stack                                                                                      |          4 |        139 |          3 |         32 |        174 |
+| main\java\vjvm\interpreter\instruction\stores                                                                                     |          1 |         87 |          5 |         27 |        119 |
+| main\java\vjvm\runtime                                                                                                            |         26 |      1,194 |        179 |        283 |      1,656 |
+| main\java\vjvm\runtime\classdata                                                                                                  |         20 |        638 |         72 |        174 |        884 |
+| main\java\vjvm\runtime\classdata\attribute                                                                                        |          3 |         69 |         13 |         21 |        103 |
+| main\java\vjvm\runtime\classdata\constant                                                                                         |         13 |        355 |         11 |         88 |        454 |
+| main\java\vjvm\utils                                                                                                              |          3 |         47 |          3 |         15 |         65 |
+| main\java\vjvm\vm                                                                                                                 |          2 |        168 |          7 |         41 |        216 |
+| test                                                                                                                              |          6 |        291 |          3 |         83 |        377 |
+| test\java                                                                                                                         |          6 |        291 |          3 |         83 |        377 |
+| test\java\lab0                                                                                                                    |          1 |          9 |          0 |          4 |         13 |
+| test\java\lab1                                                                                                                    |          3 |        188 |          3 |         53 |        244 |
+| test\java\lab2                                                                                                                    |          2 |         94 |          0 |         26 |        120 |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                          | language | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\AttributeTags.java                           | Java     |         31 |          3 |          2 |         36 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\ClassAccessFlags.java                        | Java     |         12 |          3 |          2 |         17 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\ConstantTags.java                            | Java     |         20 |          3 |          2 |         25 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\Descriptors.java                             | Java     |         50 |          6 |          7 |         63 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\FieldAccessFlags.java                        | Java     |         12 |          3 |          2 |         17 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\MethodAccessFlags.java                       | Java     |         15 |          3 |          2 |         20 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\MethodDescriptors.java                       | Java     |         41 |          5 |          6 |         52 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classfiledefs\Opcodes.java                                 | Java     |        208 |         14 |         12 |        234 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classloader\JClassLoader.java                              | Java     |         57 |         10 |          7 |         74 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classloader\searchpath\ClassSearchPath.java                | Java     |         51 |         19 |         11 |         81 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\classloader\searchpath\ModuleSearchPath.java               | Java     |         46 |          0 |         10 |         56 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\Breakpoint.java                                | Java     |         37 |          0 |          9 |         46 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\JInterpreter.java                              | Java     |        134 |         12 |         25 |        171 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\JMonitor.java                                  | Java     |        207 |          6 |         41 |        254 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\Decoder.java                       | Java     |        105 |          2 |          9 |        116 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\Instruction.java                   | Java     |          7 |          0 |          4 |         11 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\comparisons\IFCOND.java            | Java     |         92 |          4 |         16 |        112 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\comparisons\IF_XCMPCOND.java       | Java     |         94 |          0 |         15 |        109 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\comparisons\LCMP.java              | Java     |         33 |          0 |          7 |         40 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\comparisons\XCMPCOND.java          | Java     |         49 |          0 |         10 |         59 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\constants\LDCX.java                | Java     |         66 |          3 |         11 |         80 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\constants\NOP.java                 | Java     |         18 |          0 |          4 |         22 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\constants\XCONST_Y.java            | Java     |         68 |          4 |         20 |         92 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\constants\XPUSH.java               | Java     |         29 |          3 |          7 |         39 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\control\GOTO.java                  | Java     |         27 |          0 |          6 |         33 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\control\XRETURN.java               | Java     |         46 |          0 |         12 |         58 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\conversions\X2Y.java               | Java     |         75 |          0 |         22 |         97 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\loads\XLOAD.java                   | Java     |         86 |          3 |         26 |        115 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\math\IINC.java                     | Java     |         15 |          0 |          6 |         21 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\math\LIOPR.java                    | Java     |         15 |          0 |          5 |         20 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\math\XNEG.java                     | Java     |         15 |          0 |          5 |         20 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\math\XOPR.java                     | Java     |         15 |          0 |          5 |         20 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\references\INVOKESTATIC.java       | Java     |         43 |          9 |         13 |         65 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\reserved\BREAKPOINT.java           | Java     |         20 |          0 |          5 |         25 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\stack\DUPX.java                    | Java     |         39 |          0 |         10 |         49 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\stack\DUPX_XY.java                 | Java     |         39 |          0 |          9 |         48 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\stack\POPX.java                    | Java     |         32 |          3 |          8 |         43 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\stack\SWAP.java                    | Java     |         29 |          0 |          5 |         34 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\interpreter\instruction\stores\XSTORE.java                 | Java     |         87 |          5 |         27 |        119 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\JClass.java                                        | Java     |        107 |          7 |         27 |        141 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\JFrame.java                                        | Java     |         30 |          0 |          6 |         36 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\JThread.java                                       | Java     |         32 |          2 |         13 |         47 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\OperandStack.java                                  | Java     |        128 |         41 |         24 |        193 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\ProgramCounter.java                                | Java     |         29 |          0 |         11 |         40 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\Slots.java                                         | Java     |        230 |         57 |         28 |        315 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\ConstantPool.java                        | Java     |         34 |         13 |          8 |         55 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\FieldInfo.java                           | Java     |         71 |         11 |         21 |        103 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\Interface.java                           | Java     |         20 |         13 |          7 |         40 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\MethodInfo.java                          | Java     |         89 |         11 |         29 |        129 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\attribute\Attribute.java                 | Java     |         29 |         11 |          8 |         48 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\attribute\Code.java                      | Java     |         27 |          2 |          8 |         37 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\attribute\UnknownAttribute.java          | Java     |         13 |          0 |          5 |         18 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\ClassConstant.java              | Java     |         37 |          4 |          8 |         49 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\Constant.java                   | Java     |         74 |          7 |          6 |         87 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\DoubleConstant.java             | Java     |         16 |          0 |          6 |         22 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\FieldrefConstant.java           | Java     |         28 |          0 |          7 |         35 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\FloatConstant.java              | Java     |         16 |          0 |          6 |         22 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\IntegerConstant.java            | Java     |         16 |          0 |          6 |         22 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\InterfaceMethodrefConstant.java | Java     |         28 |          0 |          7 |         35 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\LongConstant.java               | Java     |         16 |          0 |          6 |         22 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\MethodrefConstant.java          | Java     |         28 |          0 |          7 |         35 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\NameAndTypeConstant.java        | Java     |         39 |          0 |          9 |         48 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\StringConstant.java             | Java     |         22 |          0 |          7 |         29 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\UTF8Constant.java               | Java     |         17 |          0 |          6 |         23 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\runtime\classdata\constant\UnknownConstant.java            | Java     |         18 |          0 |          7 |         25 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\utils\InputUtils.java                                      | Java     |         33 |          3 |         10 |         46 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\utils\UnimplementedError.java                              | Java     |          8 |          0 |          3 |         11 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\utils\UnimplementedInstructionError.java                   | Java     |          6 |          0 |          2 |          8 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\vm\Main.java                                               | Java     |        117 |          6 |         28 |        151 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\main\java\vjvm\vm\VMContext.java                                          | Java     |         51 |          1 |         13 |         65 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab0\Dummy.java                                                 | Java     |          9 |          0 |          4 |         13 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab1\DumpClasses.java                                           | Java     |         36 |          1 |         13 |         50 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab1\FindClasses.java                                           | Java     |         36 |          1 |         15 |         52 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab1\Utils.java                                                 | Java     |        116 |          1 |         25 |        142 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab2\RunClassesTest.java                                        | Java     |         48 |          0 |         13 |         61 |
+| \\wsl$\Ubuntu-22.04\home\kitagrace\VJVM\VJVM-public\src\test\java\lab2\TestUtils.java                                             | Java     |         46 |          0 |         13 |         59 |
+| Total                                                                                                                             |          |      3,765 |        315 |        827 |      4,907 |
++-----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

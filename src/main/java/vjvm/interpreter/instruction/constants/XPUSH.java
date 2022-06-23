@@ -8,6 +8,9 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
+/**
+ * load constant value from bytes to op stack.
+ * */
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class XPUSH extends Instruction {
     private final int value;
@@ -24,6 +27,7 @@ public class XPUSH extends Instruction {
     @Override
     public void run(JThread thread) {
         var opStack = thread.top().stack();
+        System.err.println(name + ": " + value);
         opStack.pushInt(value);
     }
 
