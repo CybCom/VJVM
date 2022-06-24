@@ -57,4 +57,9 @@ public class RunClassesTest {
     public void runAdd() {
         TestUtils.runClass("lab2.Add");
     }
+
+    // @Test
+    // public void runFibonacci() {
+    //     TestUtils.runClass("lab2.Fibonacci");
+    // }
 }

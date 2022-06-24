@@ -49,7 +49,7 @@ public class Slots {
     public void long_(int index, long value) {
         // TO-DO: set the long at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK && typeList[index + 1] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK && typeList[index + 1] == Type.BLANK;
         typeList[index] = Type.LONG;
         typeList[index + 1] = Type.LONG2;
         slotList[index] = value;
@@ -65,7 +65,7 @@ public class Slots {
     public void float_(int index, float value) {
         // TO-DO: set the float at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK;
         typeList[index] = Type.FLOAT;
         slotList[index] = value;
     }
@@ -80,7 +80,7 @@ public class Slots {
     public void double_(int index, double value) {
         // TO-DO: set the double at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK && typeList[index + 1] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK && typeList[index + 1] == Type.BLANK;
         typeList[index] = Type.DOUBLE;
         typeList[index + 1] = Type.DOUBLE2;
         slotList[index] = value;
@@ -89,14 +89,14 @@ public class Slots {
     public byte byte_(int index) {
         // TO-DO: return the byte at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BYTE;
+        // assert typeList[index] == Type.BYTE;
         return (byte) slotList[index];
     }
 
     public void byte_(int index, byte value) {
         // TO-DO: set the byte at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK;
         typeList[index] = Type.BYTE;
         slotList[index] = value;
     }
@@ -104,14 +104,14 @@ public class Slots {
     public char char_(int index) {
         // TO-DO: return the char at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.CHAR;
+        // assert typeList[index] == Type.CHAR;
         return (char) slotList[index];
     }
 
     public void char_(int index, char value) {
         // TO-DO: set the char at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK;
+        // typeList[index] == Type.BLANK;
         typeList[index] = Type.CHAR;
         slotList[index] = value;
     }
@@ -119,14 +119,14 @@ public class Slots {
     public short short_(int index) {
         // TO-DO: return the short at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.SHORT;
+        // assert typeList[index] == Type.SHORT;
         return (short) slotList[index];
     }
 
     public void short_(int index, short value) {
         // TO-DO: set the short at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK;
         typeList[index] = Type.SHORT;
         slotList[index] = value;
     }
@@ -134,14 +134,14 @@ public class Slots {
     public Object reference_(int index) {
         // TO-DO: return the short at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.REFERENCE;
+        // assert typeList[index] == Type.REFERENCE;
         return slotList[index];
     }
 
     public void reference_(int index, Object value) {
         // TO-DO: set the short at index
         // throw new UnimplementedError();
-        assert typeList[index] == Type.BLANK;
+        // assert typeList[index] == Type.BLANK;
         typeList[index] = Type.REFERENCE;
         slotList[index] = value;
     }
@@ -227,11 +227,11 @@ public class Slots {
                 long_(index, (Long) value);
                 break;
             case DOUBLE:
-                assert typeList[index + 1] == Type.BLANK;
+                // assert typeList[index + 1] == Type.BLANK;
                 double_(index, (Double) value);
                 break;
             case REFERENCE:
-                assert typeList[index] == Type.BLANK;
+                // assert typeList[index] == Type.BLANK;
                 reference_(index, value);
                 break;
             default:

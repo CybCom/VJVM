@@ -34,7 +34,7 @@ public class InputUtils {
             i += c - '0';
             c = in.read();
         }
-
+        System.err.println("the out layer java is reading long, get " + i);
         return negative ? -i : i;
     }
 

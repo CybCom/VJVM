@@ -154,6 +154,7 @@ public class JInterpreter {
                 s.pushInt((Integer) ret);
                 break;
             case DESC_long:
+                System.err.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + ret);
                 s.pushLong((Long) ret);
                 break;
             case DESC_short:
